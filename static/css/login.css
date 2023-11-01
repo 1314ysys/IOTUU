@@ -1,0 +1,196 @@
+/* 清除浏览器默认边距，
+使边框和内边距的值包含在元素的width和height内 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#toast {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+    color: black; 
+    background-color: rgba(255, 255, 255, 0.712); 
+    border-radius: 5px;
+    position:absolute;
+    top: 1vw;
+    left: 45%;
+    padding: 15px;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.login-form {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+}
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 登录框样式 */
+
+.ssbox {
+    position: relative;
+    width: 25vw;
+    height: 30vw;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: space-between;
+}
+
+
+#toggleBtn {
+    position: absolute;
+    top: 0.5vw;
+    right: 0.5vw;
+    height: 2.5vw;
+    width: 2.5vw;
+    transform: scaleX(1); 
+    transition: transform 0.5s ease-in-out;
+}
+
+.container .flipped #toggleBtn {
+    transform: scaleX(-1);
+}
+
+
+
+/* 登录标题样式 */
+
+.form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+
+.form h2 {
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+/* 登录标题的下划线样式 */
+
+.form h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0px;
+    height: 3px;
+    background: #2b85fb;
+    transition: 0.5s;
+}
+
+.form h2:hover:before {
+    width: 7.5vw;
+}
+
+.form .inputBox {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* 输入框样式 */
+
+.form .inputBox input {
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form .inputBox input::placeholder {
+    color: #fff;
+}
+
+/* 登录按钮样式 */
+
+.form .inputBox input[type="submit"] {
+    background: #fff;
+    color: #666;
+    max-width: 100px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.forget {
+    margin-top: 6px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.forget a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+/*发送验证码按钮的样式*/
+.custom-btn-wrapper {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.custom-btn-wrapper button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: small;
+    background-color: #2b85fb;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.custom-btn-wrapper button:hover {
+    background-color: #2173de;
+}
+
+.custom-btn-wrapper button:active {
+    background-color: #164f9a;
+}

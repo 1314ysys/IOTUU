@@ -1,0 +1,186 @@
+/* 调整响应式布局 */
+@media (max-width: 992px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+    z-index: 9999;
+    background-color: #fff;
+    overflow-y: auto;
+  }
+}
+
+/*旋转刷新按钮*/
+.rotate-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  height: 20px;
+  width: 20px;
+}
+
+.rotate-button img {
+  height: 20px;
+  width: 20px;
+  margin-top: -5px;
+  transition: transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.rotate-button:hover img {
+  transform: rotate(180deg); /* 鼠标悬停时旋转180度 */
+}
+/*点击后的旋转按钮类*/
+.rotate-anim {
+  animation: rotate 1s; /* 动画持续时间为1秒 */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); /* 开始时的旋转角度为0度 */
+  }
+  to {
+    transform: rotate(360deg); /* 结束时的旋转角度为360度 */
+  }
+}
+
+
+/*添加设备按钮动画*/
+.brightness-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  height: 20px;
+  width: 20px;
+}
+
+.brightness-button img {
+  height: 18px;
+  width: 18px;
+  margin-top: -5px;
+  transition: transform 0.3s ease, filter 0.3s ease; /* 添加过渡效果 */
+}
+
+.brightness-button:hover img {
+  transform: scale(1.1); /* 鼠标悬停时缩放1.1倍 */
+  filter: brightness(2.5); /* 鼠标悬停时亮度变为2.5 */
+}
+
+/*功能切换按钮动画*/
+.icon-button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+}
+
+.icon-button img {
+  height: 30px;
+  width: 30px;
+  transition: src 0.3s ease; /* 添加过渡效果 */
+}
+
+.icon-button:hover img {
+  content: url('/static/img/功能键按下.svg'); /* 鼠标悬停时更改图片 */
+}
+
+
+/*顶部消息弹窗*/
+#toast {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+  color: black; 
+  background-color: rgba(255, 255, 255, 0.712); 
+  border-radius: 5px;
+  position:absolute;
+  top: 1vw;
+  left: 45%;
+  padding: 15px;
+
+  /* 样式设置 */
+  width: auto;
+  max-width: 350px;
+  height: auto;
+  max-height: 150px;
+  overflow-y: auto;
+  /* 其他样式设置 */
+}
+
+.left-div {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  justify-content: center;
+}
+
+.left-div:hover {
+  background-color: #1f2227;
+}
+
+.left-font {
+  text-decoration: none;
+  color: white;
+  font-size: 12pt;
+  cursor: default;
+  filter: brightness(0.8);
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 40px;
+}
+
+.left-img{
+  width: 25px; 
+  height: 25px;
+  margin-right: 12px;
+}
+
+
+.message-icon {
+position: relative;
+}
+.message-icon::after {
+  content: "";
+  position: absolute;
+  width: 0.5vw;
+  height: 0.5vw;
+  background-color: red;
+  border-radius: 100%;
+}
+.right-font{
+font-size:x-large;
+color: #293042;
+margin-left: 8px;
+}
+.card{
+background-color: #fff;
+box-shadow: 0 0 6px rgba(124, 105, 105, 0.5);
+border-radius: 3px;
+position: relative;
+height: 100%;
+overflow-y: auto;
+-ms-overflow-style: none; /* IE and Edge */
+scrollbar-width: none; /* Firefox */
+}
+
+/* 针对Firefox浏览器，需要为滚动元素的 ::-webkit-scrollbar 伪元素设置样式 */
+.card::-webkit-scrollbar {
+display: none;
+}
+
+.custom-btn-container {
+        position: absolute;
+        left: auto;
+        right: 0vw;
+    }
+    
+    .custom-btn {
+        width: 4vw;
+        height: 2vw;
+        font-size: small;
+        margin-right: 0.3vw;
+    }
