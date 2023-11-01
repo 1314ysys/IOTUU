@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>控制面板主页</title>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" /> -->
+  <!-- <link rel="stylesheet" href="../css/page.css"> -->
+    <!--引入本地css样式-->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/main.css" />
+  <!--引入网页图标-->
+  <link rel="icon" href="/static/img/主页.svg" type="image/x-icon" />
+
+
+</head>
+<body>
+<!-- 消息提醒框 -->
+<div id="toast"></div>
+<!-- 控制面板 -->
+<div style="display: flex;flex-direction: row;">
+  <div class="col-md-2" id="sidebar" style="background-color: #293042; padding: 0%; display: flex; flex-direction: column;height: 100vh;">
+    <div style="display: flex; align-items: center; height: 55px; justify-content: center;margin-top: 5px;">
+      <img src="/static/img/ram访问控制.svg" alt="图标" style="width: 40px; height: 40px; font-size: 12pt;">
+      <p style="color: white; font-size: 12pt; margin: 0; cursor: default;">OlinePanel</p>
+    </div>
+  
+    <div class="left-div" >
+      <a href="/homepage" class="left-font">
+        <img src="/static/img/wxb主页.svg" alt="概览面板" class="left-img">
+        概览面板
+      </a>
+    </div>
+  
+    <div class="left-div" style="background-color: #1f2227;">
+      <div style="filter: brightness(1.5);">
+        <a href="/devices" class="left-font">
+          <img src="/static/img/设备状态.svg" alt="设备控制" class="left-img" style="filter: brightness(1.5);">
+          设备控制
+        </a>
+      </div>
+    </div>
+  
+    <div class="left-div">
+      <a href="/datacheck" class="left-font">
+        <img src="/static/img/储存.svg" alt="数据访问" class="left-img">
+        数据访问
+      </a>
+    </div>
+  
+    <div class="left-div">
+      <a href="/network" class="left-font">
+        <img src="/static/img/网络.svg" alt="网络状态" class="left-img">
+        网络状态
+      </a>
+    </div>
+  
+    <div class="left-div">
+      <a href="/packstore" class="left-font">
+        <img src="/static/img/all.svg" alt="插件商店" class="left-img">
+        插件商店
+      </a>
+    </div>
+  
+    <div class="left-div">
+      <a href="/plantasks" class="left-font">
+        <img src="/static/img/计划.svg" alt="计划任务" class="left-img">
+        计划任务
+      </a>
+    </div>
+  
+    <div class="left-div">
+      <a href="/panelset" class="left-font">
+        <img src="/static/img/iconfont-jixieqimo.svg" alt="面板设置" class="left-img">
+        面板设置
+      </a>
+    </div>
+  
+    <div class="left-div">
+      <a href="#" onclick="logout()" class="left-font" id="logout-btn">
+        <img src="/static/img/退出.svg" alt="退出登录" class="left-img">
+        退出登录
+      </a>
+    </div>
+  </div>
+
+
+  <!-- 主体内容 -->
+  <div class="col-md-10" id="content" style="background-color: transparent;padding: 0%;">
+    <!--下面是导航栏-->
+    <div style="display: flex; text-align: center; align-items: center; height: 60px; width: 100%; background-color: #ffffff;box-shadow: 0 2px 8px rgba(77, 60, 60, 0.2);">
+      <button id="sidebarToggle" class="icon-button" style="background-color: transparent; border: none; height: 60px; width: 60px;margin-left: 5px;">
+        <img src="/static/img/功能常态2.svg" alt="Control Icon" style="height: 30px; width: 30px;" />
+      </button>
+    
+      <div style="display: flex; align-items: center; margin-left: 8pt;height: 35px; padding: 5px; border-radius: 3px; border: 1px solid #f3f6fb;background-color: #f3f6fb;outline: none;">
+        <input type="text" placeholder="搜索" style="height: 35px; padding: 5px; border-radius: 3px; border: 1px solid #f3f6fb;background-color: #f3f6fb;outline: none;">
+        <button style="background-color: transparent; border: none; height: 30px; width: 30px; margin-left: 5px;">
+          <img src="/static/img/wxb搜索推广.svg" alt="Search Icon" style="height: 30px; width: 30px;">
+        </button>
+      </div>
+
+      <div class="dropdown transparent-dropdown" style="display: flex;flex-direction: row; position: relative; margin-left: auto; margin-right: 25px; background-color: transparent">
+        <!--消息及红点提醒-->
+        <button class="message-icon" style="background-color: transparent; border: none; outline: none;">
+          <img src="/static/img/消息.svg" alt="message" style="height: 30px; width: 30px; border-radius: 50%;">
+        </button>
+        <p style="font-size: small;margin: 1vw 5px;cursor: default;" id="accountID"></p>
+        <!--头像-->
+        <button style="background-color: transparent;color:#293042; border: none; outline: none;" class="btn btn-secondary dropdown-toggle" type="button" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="/static/img/head.jpeg" alt="User Avatar" style="height: 40px; width: 40px; border-radius: 50%;">
+        </button>
+        <!--下拉菜单-->
+        <ul style="font-size: small;" class="dropdown-menu" aria-labelledby="avatarDropdown">
+          <li><a class="dropdown-item" href="/userinfo">用户信息</a></li>
+          <li><a class="dropdown-item" href="/repassword">修改密码</a></li>
+          <li><a class="dropdown-item" href="#">关于项目</a></li>
+          <li><a class="dropdown-item" href="javascript:void(0)" onclick="logout()">退出登录</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!--下面是主窗口-->
+    <div style="padding: 10px;height: 45vw;">
+
+      <div class="card">
+        <!--下面是设备界面-->
+        <div id="device_list">
+          <p class="right-font">设备</p>
+
+          <div style="display: flex;flex-direction:row;height:50px;">
+            <p style="margin-left: 2vw;">设备列表</p>
+            <!-- <button onclick="getDevicesDetails()" style="outline: none;border: none;background-color: transparent;height: 20px;width: 20px;">
+              <img src="/static/img/刷新.svg" alt="refesh" style="height: 20px;width: 20px;margin-top: -5px;">
+            </button> -->
+            <button class="rotate-button" onclick="getDevicesDetails()">
+              <img src="/static/img/刷新.svg" alt="refesh">
+            </button>            
+            <!-- <button onclick="addDeviceName()" id="addButton" style="margin-left: 10px; outline: none;border: none;background-color: transparent;height: 20px;width: 20px;">
+              <img src="/static/img/添加.svg" alt="添加" style="height: 18px;width: 18px;margin-top: -5px;">
+            </button>    -->
+            <button class="brightness-button" onclick="addDeviceName()" id="addButton" style="margin-left: 10px; outline: none;border: none;background-color: transparent;height: 20px;width: 20px;">
+              <img src="/static/img/添加.svg" alt="添加">
+            </button>            
+            <hr>
+          </div>
+          
+          
+          <div style="display: flex;flex-direction:row;height:50px;padding: 10px;">
+            <p style="margin-left: 3vw;">MAC地址</p>
+            <p style="margin-left: 10vw;">设备名称</p>
+            <p style="margin-left: 7vw;">状态</p>
+            <p style="margin-left: 6vw;">地区</p>
+            <p style="margin-left: 6vw;">传感器</p>
+            <p style="margin-left: 10vw;">异常事件</p>
+          </div>
+          <!--具体的传感器-->
+          <div style="display: flex;flex-direction:row;height:50px;padding: 10px;font-size: medium;">
+            <p style="margin-left: 1vw;cursor: default;" id="macid">00-1C-3B-AF-64-7C</p>
+            <p style="margin-left: auto;cursor: default;" id="devicename">ESP01S测试</p>
+            <button style="outline: none;border: none;background-color: transparent;height: 18px;width: 18px;" onclick="editDeviceName()">
+              <img src="/static/img/编辑.svg" alt="refesh" style="height: 18px;width: 18px;">
+            </button>
+            <div style="display: flex;flex-direction:row;margin-left: auto;cursor: default;">
+              <div style="background-color: blue;width: 0.8vw;height: 0.8vw;border-radius: 50%;margin-right: 5px;margin-top: 0.3vw;"></div>
+              <p id="zhuangtai">在线</p>
+            </div>
+            <p style="margin-left: auto;cursor: default;" id="diqu">泉州</p>
+            <p style="margin-left: auto;cursor: default;" id="chuanganqi">DHT11,烟雾报警</p>
+            <p style="margin-left: auto;margin-right: 16vw;cursor: default;" id="yichang">运行正常</p>
+
+            <div class="custom-btn-container">
+              <div style="display: flex;flex-direction: row;">
+                <a href="#" id="detail-link" class="btn btn-primary custom-btn" onclick="showTest()">详情</a>
+                <a href="#" class="btn btn-danger custom-btn" onclick="showTest()">删除</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle custom-btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        更多
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a style="font-size: small;" class="dropdown-item" href="#">移动设备分组</a></li>
+                        <li><a style="font-size: small;" class="dropdown-item" href="#">设备关机</a></li>
+                        <li><a style="font-size: small;" class="dropdown-item" href="#">设备重启</a></li>
+                        <li><a style="font-size: small;" class="dropdown-item" href="/updatefirm" >在线编程固件</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+        
+
+
+    </div>
+
+  </div>
+</div>
+
+    <script>
+
+      function sendPhoneVerificationCode() {
+        // 实现发送手机验证码的逻辑
+        alert('发送手机验证码功能尚未实现');
+      }
+      function showTest() {
+        alert("测试设备，不可修改查看");
+      }
+
+      function editUserInfo() {
+        // 获取需要修改的表单元素
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const avatarUploadInput = document.getElementById('avatarUpload');
+        const avatarSelect = document.getElementById('avatar');
+
+        // 将表单元素变为可编辑状态
+        usernameInput.contentEditable = true;
+        emailInput.contentEditable = true;
+        phoneNumberInput.contentEditable = true;
+        avatarUploadInput.disabled = false;
+        avatarSelect.disabled = false;
+
+        // 给表单元素添加编辑样式
+        usernameInput.classList.add('editable');
+        emailInput.classList.add('editable');
+        phoneNumberInput.classList.add('editable');
+
+        // 显示保存按钮
+        const saveButton = document.getElementById('saveButton');
+        saveButton.style.display = 'inline-block';
+
+        // 显示验证码输入框（仅在需要验证时）
+        const emailVerificationContainer = document.getElementById('emailVerificationContainer');
+        const phoneVerificationContainer = document.getElementById('phoneVerificationContainer');
+        emailVerificationContainer.style.display = 'flex';
+        phoneVerificationContainer.style.display = 'flex';
+
+        // 显示密码输入框和确认按钮
+        const passwordContainer = document.getElementById('passwordContainer');
+        const passwordButton = document.getElementById('passwordButton');
+        passwordContainer.style.display = 'flex';
+        passwordButton.style.display = 'inline-block';
+      }
+
+      function saveUserInfo() {
+        // 获取修改后的用户信息
+        const updatedUsername = document.getElementById('username').innerText;
+        const updatedEmail = document.getElementById('email').innerText;
+        const updatedPhoneNumber = document.getElementById('phoneNumber').innerText;
+        const avatarUpload = document.getElementById('avatarUpload');
+        const selectedAvatar = document.getElementById('avatar').value;
+        const emailVerificationCode = document.getElementById('emailVerificationCode').value;
+        const phoneVerificationCode = document.getElementById('phoneVerificationCode').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // 发送修改后的用户信息、上传头像和验证码到后端进行保存和验证
+
+        // 将表单元素恢复为只读状态
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const avatarUploadInput = document.getElementById('avatarUpload');
+        const avatarSelect = document.getElementById('avatar');
+        const emailVerificationContainer = document.getElementById('emailVerificationContainer');
+        const phoneVerificationContainer = document.getElementById('phoneVerificationContainer');
+        const passwordContainer = document.getElementById('passwordContainer');
+        const passwordButton = document.getElementById('passwordButton');
+
+        usernameInput.contentEditable = false;
+        emailInput.contentEditable = false;
+        phoneNumberInput.contentEditable = false;
+        avatarUploadInput.disabled = true;
+        avatarSelect.disabled = true;
+        emailVerificationContainer.style.display = 'none';
+        phoneVerificationContainer.style.display = 'none';
+        passwordContainer.style.display = 'none';
+        passwordButton.style.display = 'none';
+
+        // 移除编辑样式
+        usernameInput.classList.remove('editable');
+        emailInput.classList.remove('editable');
+        phoneNumberInput.classList.remove('editable');
+
+        // 隐藏保存按钮
+        const saveButton = document.getElementById('saveButton');
+        saveButton.style.display = 'none';
+
+        // 清空验证码输入框和密码输入框的值
+        document.getElementById('emailVerificationCode').value = '';
+        document.getElementById('phoneVerificationCode').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+      }
+    </script>
+
+    <script>
+        //页面加载完成事件
+        window.addEventListener('load', function() {
+        const pElement = document.getElementById('accountID');
+        const username = getCookieValue('username');
+        if (username) {
+            // 检查是否为数字
+            const parsedUsername = isNaN(username) ? username.slice(1, -1) : username;
+
+            pElement.textContent = '你好！' + parsedUsername;
+        } else {
+            pElement.textContent = '你好！';
+        }
+        });
+
+        function getCookieValue(cookieName) {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(cookieName + '=')) {
+            const value = decodeURIComponent(cookie.substring(cookieName.length + 1));
+            return value;
+            }
+        }
+        return null;
+        }
+
+    // 显示消息弹窗函数
+    const toast = document.getElementById('toast');
+    function showToast(message) {
+    toast.textContent = message;
+    toast.style.opacity = 1;
+    toast.style.visibility = 'visible';
+
+    setTimeout(function() {
+        toast.style.opacity = 0;
+        toast.style.visibility = 'hidden';
+    }, 3000);
+    }
+
+    //确认用户是否退出
+    function logout() {
+        if (confirm("确定要退出吗？")) {
+            window.location.href = "/logout";
+        }
+    }
+    
+    //左侧页面是否弹出
+    //控制弹窗的功能
+    var sidebar = document.getElementById('sidebar');
+    var content = document.getElementById('content');
+    var sidebarToggle = document.getElementById('sidebarToggle');
+    //调整左边控制面板图标的亮度
+    // 获取具有“left-font”类的所有元素
+    const buttons = document.getElementsByClassName('left-font');
+
+    // 为每个按钮添加鼠标移入和移出事件的监听器
+    Array.from(buttons).forEach(function(button) {
+      button.addEventListener('mouseover', function() {
+        button.style.filter = 'brightness(1.5)';
+      });
+
+      button.addEventListener('mouseout', function() {
+        button.style.filter = 'brightness(0.8)';
+      });
+    });
+
+    // 页面加载时判断是否需要隐藏控制面板
+    if (window.innerWidth < 992) {
+      sidebar.style.display = 'none';
+      content.classList.remove('col-md-9');
+      content.classList.add('col-md-12');
+    }
+
+    // 监听窗口大小变化事件，根据当前宽度调整布局
+    window.addEventListener('resize', function () {
+      if (window.innerWidth < 992) {
+        sidebar.style.display = 'none';
+        content.classList.remove('col-md-9');
+        content.classList.add('col-md-12');
+      } else {
+        sidebar.style.display = 'block';
+        content.classList.remove('col-md-12');
+        content.classList.add('col-md-9');
+      }
+    });
+
+    // 点击按钮弹出/隐藏控制面板
+    sidebarToggle.addEventListener('click', function () {
+      if (sidebar.style.display === 'none') {
+        sidebar.style.display = 'block';
+        content.classList.remove('col-md-12');
+        content.classList.add('col-md-9');
+      } else {
+        sidebar.style.display = 'none';
+        content.classList.remove('col-md-9');
+        content.classList.add('col-md-12');
+      }
+    });
+
+    //获取用户信息部分
+    function fillUserInfo() {
+    // 获取用户信息的逻辑
+    var accountId = document.getElementById("accountID").innerText.replace("你好！", "");//获取用户名
+    fetch('/get_userinfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ accountId }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // 填充用户名、头像、邮箱、手机号等信息
+        document.getElementById('username').textContent = data.username;
+        document.getElementById('avatar').src = `/static/img/avatar/user/${data.avatar}.png`;
+        document.getElementById('email').textContent = data.email;
+        document.getElementById('phoneNumber').textContent = data.phone_number;
+        document.getElementById('userRole').textContent = data.user_role;
+        document.getElementById('deviceCount').textContent = `${data.device_count} 个`;
+      })
+      .catch(error => console.error('Error fetching user info:', error));
+  }
+
+
+
+
+
+    </script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  <!--引用本地 js-->
+  <script src="/static/js/chart.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/devices.js"></script>
+</body>
+
+
+</html>

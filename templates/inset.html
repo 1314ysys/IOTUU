@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>注册</title>
+  <!-- <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" /> -->
+  <link rel="stylesheet" href="/static/css/inset.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="icon" href="/static/img/注册邀请.svg" type="image/x-icon" />
+</head>
+
+<body>
+<!-- 登录框 -->
+<div id="toast"></div>
+<!--下面是页面代码-->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">注册</h2>
+        <form>
+          <div class="form-group mb-3">
+            <label for="exampleInputAccount" class="form-label">账号</label>
+            <input type="text" class="form-control" id="exampleInputAccount" placeholder="请输入您的账号" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="exampleInputPassword" class="form-label">密码</label>
+            <input type="password" class="form-control" id="exampleInputPassword" placeholder="请输入您的密码" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="exampleInputConfirmPassword" class="form-label">确认密码</label>
+            <input type="password" class="form-control" id="exampleInputConfirmPassword" placeholder="请再次输入您的密码" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="bindType" class="form-label">绑定类型</label>
+            <select class="form-control" id="bindType" onchange="toggleInput(); toggleVerificationCodeButton();">
+              <option value="">请选择绑定类型</option>
+              <option value="phone">手机</option>
+              <option value="email">邮箱</option>
+            </select>
+          </div>
+
+          <div class="form-group mb-3" id="bindInputContainer" style="display: none;"></div>
+
+          <div id="verificationCodeContainer" style="display: none;">
+            <div class="form-group text-center">
+              <button type="button" class="btn btn-primary" disabled id="verificationCodeBtn">发送验证码</button>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="verificationCode" class="form-label">验证码</label>
+            <input type="text" class="form-control" id="verificationCode" placeholder="请输入接收到的验证码" />
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-success btn-block">注册</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script> -->
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/inset.js"></script>
+</body>
+
+</html>
